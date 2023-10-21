@@ -1,0 +1,56 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.header {
+  @apply xl:px-[150px] px-7 py-4 xl:pt-6 lg:pb-4 lg:px-[50px] dark:bg-[#232323];
+}
+
+.nav-logo {
+  @apply xl:text-3xl text-2xl text-[#333] dark:text-white;
+}
+
+.nav-grid {
+  @apply grid grid-cols-2 md:grid-cols-6 lg:gap-4 xl:gap-6 md:gap-2;
+}
+
+.nav-search {
+  @apply bg-[#f4f4f4] outline-none border border-[#ECECEC] rounded-md text-sm text-[#4F4F4F];
+}
+
+.home-search {
+  @apply bg-[#fff] outline-none border border-[#ECECEC] rounded-md text-sm text-[#c4c4c4];
+}
+
+.masonry {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  grid-gap: 20px;
+}
+
+.masonry .image-card {
+  margin-bottom: 0;
+}
+
+
+input[type="search"]::-webkit-search-cancel-button {
+  -webkit-appearance: none;
+  height: 1em;
+  width: 1em;
+  background: url(https://img.icons8.com/small/16/delete-sign.png) no-repeat;
+  background-size: contain;
+  cursor: pointer;
+}
+
+/* For Webkit-based browsers (Chrome, Safari and Opera) */
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+/* For IE, Edge and Firefox */
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  /* IE and Edge */
+  scrollbar-width: none;
+  /* Firefox */
+}

@@ -34,12 +34,9 @@ const HomeSearchBar = () => {
       return [];
     }
 
-    const response = await fetch(
-      `http://localhost:3000/api/search-keywords?q=${e}`,
-      {
-        method: "GET",
-      }
-    );
+    const response = await fetch(`/api/search-keywords?q=${e}`, {
+      method: "GET",
+    });
     if (!response.ok) {
       return [];
     }

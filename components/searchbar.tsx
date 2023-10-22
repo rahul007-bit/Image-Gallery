@@ -35,13 +35,10 @@ const SearchBar = ({ placeholder }: { placeholder: string }) => {
       return [];
     }
 
-    const response = await fetch(
-      `http://localhost:3000/api/search-keywords?q=${e}`,
-      {
-        method: "GET",
-        cache: "no-cache",
-      }
-    );
+    const response = await fetch(`/api/search-keywords?q=${e}`, {
+      method: "GET",
+      cache: "no-cache",
+    });
     if (!response.ok) {
       return [];
     }

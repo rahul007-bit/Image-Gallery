@@ -1,16 +1,18 @@
 import { Montserrat } from "next/font/google";
 import Carousel from "@/components/carousel";
 import Gallery, { Image } from "@/components/gallery";
+import { headers } from "next/headers";
 
 const montserratBold = Montserrat({ subsets: ["latin"], weight: "700" });
 
 export const dynamic = "force-dynamic";
 
 const getImages = async (
-  query: string | string[] | undefined
+  query: string | string[] | undefined,
+  host: string
 ): Promise<[Image] | []> => {
   const images = await fetch(
-    `http://localhost:3000/api/search-images?${query ? `q=${query}` : ""}`,
+    `${host}/api/search-images?${query ? `q=${query}` : ""}`,
     {
       method: "GET",
       cache: "no-cache",
@@ -29,7 +31,9 @@ export default async function Search({
   params: { slug: string };
   searchParams?: { [key: string]: string | string[] | undefined };
 }) {
-  const data = await getImages(searchParams?.q);
+  const host = headers().get("host");
+  const protocal = process?.env.NODE_ENV === "development" ? "http" : "https";
+  const data = await getImages(searchParams?.q, `${protocal}://${host}`);
   const breadcrumbs = data
     ?.map((image) => {
       return image.breadcrumbs.map((breadcrumb) => breadcrumb.slug);

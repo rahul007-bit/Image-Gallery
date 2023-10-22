@@ -3,7 +3,7 @@ import { useEffect, useRef, useState } from "react";
 import ImageCard from "./imagecard";
 import { Box, Button, Modal, Typography } from "@mui/material";
 import Image from "next/image";
-import { Montserrat, Poppins } from "next/font/google";
+
 import PopUp from "./popup";
 import { useSearchParams } from "next/navigation";
 
@@ -56,7 +56,6 @@ const Gallery = ({ data, children }: GalleryProps) => {
   const [page, setPage] = useState(0);
   const [open, setOpen] = useState(false);
   const [selectedImage, setSelectedImage] = useState<Image | null>(null);
-
   const ref = useRef(null);
 
   useEffect(() => {
@@ -82,7 +81,7 @@ const Gallery = ({ data, children }: GalleryProps) => {
   const getNextPage = async () => {
     if (page <= 0) return;
     const images = await fetch(
-      `http://localhost:3000/api/search-images?page=${page}${
+      `/api/search-images?page=${page}${
         searchParams.get("q") ? `&q=${searchParams.get("q")}` : ""
       }`,
       {

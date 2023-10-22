@@ -1,12 +1,12 @@
 import Gallery from "@/components/gallery";
 import HomeSearchBar from "@/components/homesearchbar";
-
+import { headers } from "next/headers";
 import { Montserrat } from "next/font/google";
 const montserrat = Montserrat({ subsets: ["latin"], weight: "400" });
 const montserratBold = Montserrat({ subsets: ["latin"], weight: "700" });
 
-const getData = async () => {
-  const images = await fetch("http://localhost:3000/api/search-images?page=1", {
+const getData = async (host: string) => {
+  const images = await fetch(`${host}/api/search-images?page=1`, {
     method: "GET",
     cache: "no-cache",
   });
@@ -20,7 +20,9 @@ const getData = async () => {
 };
 
 export default async function Home() {
-  const images = await getData();
+  const host = headers().get("host");
+  const protocal = process?.env.NODE_ENV === "development" ? "http" : "https";
+  const images = await getData(`${protocal}://${host}`);
 
   return (
     <main>
